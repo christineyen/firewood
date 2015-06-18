@@ -63,6 +63,9 @@ def remove_chars(s):
   s = re.sub(' *: *', ' - ', s)
   s = s.replace('?','')
   s = s.replace('&','and')
+  # swap order of last ()'ed entity (the author name) and rest of the line (the title)
+  # ... in order to produce text files sortable by author rather than title
+  s = re.sub('(.*) \(([^(]*)\)$', r'\2 - \1', s)
   # replace ( ) with a hyphen so "this (text)" becomes "this - text"
   s = re.sub('\((.+?)\)', r'- \1', s)
   # delete filename chars tht are not alphanumeric or ; , _ -
